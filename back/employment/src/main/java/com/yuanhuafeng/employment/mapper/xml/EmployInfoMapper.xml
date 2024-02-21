@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuanhuafeng.employment.mapper.EmployInfoMapper">
+
+    <select id="findEmpByTeaId" resultType="com.yuanhuafeng.employment.entity.EmployInfo">
+        SELECT employ_info.* FROM employ_info
+                                      INNER JOIN student ON employ_info.student_id = student.id
+        WHERE student.teacher_id = #{teaId}
+    </select>
+    <select id="findEmpByMajorAndTeaId" resultType="com.yuanhuafeng.employment.entity.EmployInfo">
+        SELECT employ_info.* FROM employ_info
+                                      INNER JOIN student ON employ_info.student_id = student.id
+        WHERE student.teacher_id = #{teaId}  AND employ_info.major LIKE   "%"#{major}"%"
+    </select>
+    <select id="findEmpByClassNameAndTeaId" resultType="com.yuanhuafeng.employment.entity.EmployInfo">
+        SELECT employ_info.* FROM employ_info
+                                      INNER JOIN student ON employ_info.student_id = student.id
+        WHERE student.teacher_id = #{teaId}  AND employ_info.classes LIKE   "%"#{className}"%"
+    </select>
+    <select id="findEmpByProvinceAndTeaId" resultType="com.yuanhuafeng.employment.entity.EmployInfo">
+        SELECT employ_info.* FROM employ_info
+                                      INNER JOIN student ON employ_info.student_id = student.id
+        WHERE employ_info.province LIKE #{param1} AND student.teacher_id = #{param2}
+    </select>
+    <select id="findEmpByCityAndTeaId" resultType="com.yuanhuafeng.employment.entity.EmployInfo">
+        SELECT employ_info.* FROM employ_info
+                                      INNER JOIN student ON employ_info.student_id = student.id
+        WHERE employ_info.city LIKE #{param1} AND student.teacher_id = #{param2}
+    </select>
+    <select id="findEmpByAreaAndTeaId" resultType="com.yuanhuafeng.employment.entity.EmployInfo">
+        SELECT employ_info.* FROM employ_info
+                                      INNER JOIN student ON employ_info.student_id = student.id
+        WHERE employ_info.area LIKE #{param1} AND student.teacher_id = #{param2}
+    </select>
+</mapper>

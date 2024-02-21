@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuanhuafeng.employment.mapper.NewsMapper">
+
+    <select id="findAllNews" resultType="com.yuanhuafeng.employment.vo.NewsTeaVo">
+        SELECT news.*,teacher.name as teacherName FROM news INNER JOIN teacher ON news.tea_id = teacher.id OR tea_id = 0
+    </select>
+    <select id="findNew" resultType="com.yuanhuafeng.employment.vo.NewsTeaVo">
+        SELECT news.*,teacher.name as teacherName
+        FROM news
+                 INNER JOIN teacher ON news.tea_id = teacher.id
+        WHERE news.title LIKE "%"#{title}"%" OR news.content LIKE "%"#{title}"%"
+    </select>
+    <select id="findNesByTeaId" resultType="com.yuanhuafeng.employment.entity.News">
+        SELECT id,title,content,tea_id,time,cover FROM news WHERE (cover &lt;&gt; ''  AND tea_id = #{teaId} OR tea_id = '11' AND cover &lt;&gt; '')
+    </select>
+
+</mapper>
